@@ -50,6 +50,33 @@ test("a Metamorph view is not a view's parentView", function() {
   equals(children.objectAt(0), childView, "... and it is not the metamorph");
 });
 
+module("Metamorph and tables", {
+  setup: function(){
+    App = {
+      powerRangers: Ember.A(["Jason", "Zack"])
+    };
+    
+    view = Ember.View.create({
+      template: SC.Handlebars.compile("<table>{{#each App.powerRangers}}<tr><td>{{.}}</td></tr>{{/each}}</table>")
+    });
+    
+    Ember.run(function() {
+      view.appendTo("#qunit-fixture");
+    });
+    
+    
+  },
+  teardown: function(){
+    view.destroy();
+    delete App;
+  }
+});
+
+test("a metamorph view around a table on inserts a single tbody", function() {
+  set(App, 'powerRangers', Ember.A(["Trini", "Kimberly"]));
+  equals(view.$('tbody').length, 1);
+});
+
 module("Metamorph views correctly handle DOM", {
   setup: function() {
     view = Ember.View.create({
@@ -82,7 +109,6 @@ module("Metamorph views correctly handle DOM", {
 
 test("a metamorph view generates without a DOM node", function() {
   var meta = Ember.$("> h2", "#" + get(view, 'elementId'));
-
   equals(meta.length, 1, "The metamorph element should be directly inside its parent");
 });
 
