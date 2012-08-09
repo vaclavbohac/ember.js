@@ -33,7 +33,26 @@ Ember.Handlebars.EachView = Ember.CollectionView.extend(Ember._Metamorph, {
     return view;
   }
 });
-
+/**
+  
+  The `{{#each}}` helper loops over elements in a collection, rendering its block once for each item:
+  
+        Developers = [{name: 'Yehuda'},{name: 'Tom'}, {name: 'Paul'}];
+        
+        {{#each Developers}}
+          {{name}}
+        {{/each}}
+        
+  
+  `{{each}}` supports an alternative syntax with element naming:
+        
+        {{#each person in Developers}}
+          {{person.name}}
+        {{/each}}
+        
+  
+  @name Handlebars.helpers.each
+*/
 Ember.Handlebars.registerHelper('each', function(path, options) {
   if (arguments.length === 4) {
     Ember.assert("If you pass more than one argument to the each helper, it must be in the form #each foo in bar", arguments[1] === "in");
