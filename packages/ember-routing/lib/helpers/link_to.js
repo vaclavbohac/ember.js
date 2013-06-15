@@ -45,7 +45,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     
     Instances of `LinkView` will most likely be created through
     the `linkTo` Handlebars helper, but properties of this class
-    can be overridedn to customize application-wide behavior.
+    can be overridden to customize application-wide behavior.
 
     @class LinkView
     @namespace Ember
